@@ -1,5 +1,7 @@
 package com.domingosm.bookcity.bookorder;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -21,9 +23,13 @@ public class BookOrder {
     private String orderCustomerName;
     private String orderCustomerAddress;
     private String orderCustomerEmail;
-    private LocalDate orderDate;
-    private Double orderAmount;
     private Long orderBookId;
+
+    @Nullable
+    private LocalDate orderDate;
+
+    @Nullable
+    private Double orderAmount;
 
     public BookOrder() {
     }
@@ -31,15 +37,15 @@ public class BookOrder {
     public BookOrder(String orderCustomerName,
                      String orderCustomerAddress,
                      String orderCustomerEmail,
-                     LocalDate orderDate,
-                     Double orderAmount,
-                     Long orderBookId) {
+                     Long orderBookId,
+                     @Nullable LocalDate orderDate,
+                     @Nullable Double orderAmount) {
         this.orderCustomerName = orderCustomerName;
         this.orderCustomerAddress = orderCustomerAddress;
         this.orderCustomerEmail = orderCustomerEmail;
+        this.orderBookId = orderBookId;
         this.orderDate = orderDate;
         this.orderAmount = orderAmount;
-        this.orderBookId = orderBookId;
     }
 
     public Long getOrderId() {
@@ -58,8 +64,16 @@ public class BookOrder {
         return orderCustomerEmail;
     }
 
+    public Long getOrderBookId() {
+        return orderBookId;
+    }
+
     public LocalDate getOrderDate() {
         return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Double getOrderAmount() {
@@ -70,10 +84,6 @@ public class BookOrder {
         this.orderAmount = orderAmount;
     }
 
-    public Long getOrderBookId() {
-        return orderBookId;
-    }
-
     @Override
     public String toString() {
         return "BookOrder{" +
@@ -81,9 +91,9 @@ public class BookOrder {
                 ", orderCustomerName='" + orderCustomerName + '\'' +
                 ", orderCustomerAddress='" + orderCustomerAddress + '\'' +
                 ", orderCustomerEmail='" + orderCustomerEmail + '\'' +
+                ", orderBookId=" + orderBookId +
                 ", orderDate=" + orderDate +
                 ", orderAmount=" + orderAmount +
-                ", orderBookId=" + orderBookId + '\'' +
                 '}';
     }
 }

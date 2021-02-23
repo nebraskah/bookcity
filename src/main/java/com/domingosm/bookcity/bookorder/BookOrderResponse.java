@@ -12,7 +12,6 @@ public class BookOrderResponse {
     private String orderCustomerEmail;
     private LocalDate orderDate;
     private Double orderAmount;
-    private Long orderBookId;
     private Book book;
     private Integer responseCode;
     private String responseMessage;
@@ -68,14 +67,6 @@ public class BookOrderResponse {
         this.orderAmount = orderAmount;
     }
 
-    public Long getOrderBookId() {
-        return orderBookId;
-    }
-
-    public void setOrderBookId(Long orderBookId) {
-        this.orderBookId = orderBookId;
-    }
-
     public Book getBook() {
         return book;
     }
@@ -109,7 +100,6 @@ public class BookOrderResponse {
                 ", orderCustomerEmail='" + orderCustomerEmail + '\'' +
                 ", orderDate=" + orderDate +
                 ", orderAmount=" + orderAmount +
-                ", orderBookId=" + orderBookId +
                 ", book=" + book +
                 ", responseCode=" + responseCode +
                 ", responseMessage='" + responseMessage + '\'' +

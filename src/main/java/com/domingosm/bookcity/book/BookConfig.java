@@ -13,7 +13,7 @@ import java.util.List;
 public class BookConfig {
 
     @Bean
-    CommandLineRunner commandLineRunnerB1(BookRepository repository) {
+    CommandLineRunner commandLineRunnerBook(BookRepository repository) {
         return args -> {
 
             List<Book> bookList = new ArrayList<>();

@@ -3,7 +3,6 @@ package com.domingosm.bookcity.bookorder;
 import com.domingosm.bookcity.book.Book;
 import com.domingosm.bookcity.book.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -56,11 +55,12 @@ public class BookOrderService {
         if (book == null)
             throw new NoSuchElementException(String.format("ERROR: Book entry with id %s not found", String.valueOf(bookOrder.getOrderBookId())));
 
+        bookOrder.setOrderDate(LocalDate.now());
         bookOrder.setOrderAmount(book.getBookSellingPrice());
         repository.save(bookOrder);
     }
 
-    public Book getBook(Long bookId) {
+    private Book getBook(Long bookId) {
         boolean exists = bookRepository.existsById(bookId);
         if (!exists)
             return null;
