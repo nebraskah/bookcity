@@ -1,1 +1,1 @@
-# A simple online book store using Spring Boot and Java8
+# A simple online book store app using Spring Boot and Java8
