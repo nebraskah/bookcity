@@ -24,7 +24,6 @@ public class BookOrder {
     private LocalDate orderDate;
     private Double orderAmount;
     private Long orderBookId;
-    private String orderBookTitle;
 
     public BookOrder() {
     }
@@ -34,15 +33,13 @@ public class BookOrder {
                      String orderCustomerEmail,
                      LocalDate orderDate,
                      Double orderAmount,
-                     Long orderBookId,
-                     String orderBookTitle) {
+                     Long orderBookId) {
         this.orderCustomerName = orderCustomerName;
         this.orderCustomerAddress = orderCustomerAddress;
         this.orderCustomerEmail = orderCustomerEmail;
         this.orderDate = orderDate;
         this.orderAmount = orderAmount;
         this.orderBookId = orderBookId;
-        this.orderBookTitle = orderBookTitle;
     }
 
     public Long getOrderId() {
@@ -77,10 +74,6 @@ public class BookOrder {
         return orderBookId;
     }
 
-    public String getOrderBookTitle() {
-        return orderBookTitle;
-    }
-
     @Override
     public String toString() {
         return "BookOrder{" +
@@ -90,8 +83,7 @@ public class BookOrder {
                 ", orderCustomerEmail='" + orderCustomerEmail + '\'' +
                 ", orderDate=" + orderDate +
                 ", orderAmount=" + orderAmount +
-                ", orderBookId=" + orderBookId +
-                ", orderBookTitle='" + orderBookTitle + '\'' +
+                ", orderBookId=" + orderBookId + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.domingosm.bookcity.bookorder;
 
 import com.domingosm.bookcity.book.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,13 +15,14 @@ public class BookOrderController {
     private final BookOrderService bookOrderService;
 
     @Autowired
-    public BookOrderController(BookService bookService, BookOrderService bookOrderService) {
+    public BookOrderController(BookService bookService,
+                               BookOrderService bookOrderService) {
         this.bookService = bookService;
         this.bookOrderService = bookOrderService;
     }
 
     @GetMapping
-    public List<BookOrder> getOrders() {
+    public List<BookOrderResponse> getOrders() {
         return bookOrderService.getOrders();
     }
 
@@ -29,4 +31,5 @@ public class BookOrderController {
         bookOrderService.placeOrder(bookOrder);
         bookService.updateQuantity(bookOrder.getOrderBookId());
     }
+
 }
