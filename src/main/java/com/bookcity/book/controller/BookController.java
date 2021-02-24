@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * BookController class
+ */
 @RestController
 @RequestMapping("/api.bookcity.com")
 public class BookController {

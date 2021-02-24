@@ -2,6 +2,11 @@ package com.bookcity.book;
 
 import java.time.LocalDate;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * BookResponse POJO
+ */
 public class BookResponse {
 
     private Long bookId;

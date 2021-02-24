@@ -6,10 +6,9 @@ import java.util.Objects;
 
 /**
  * @author Domingos Manuel
- * Date: 23 February 2021
- * Book POJO (is this a POJO for real???)
+ * Date: 24 February 2021
+ * Book domain entity
  */
-
 @Entity
 @Table
 public class Book {

@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * Book Service class
+ */
 @Service
 public class BookService {
 

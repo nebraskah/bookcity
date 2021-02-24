@@ -5,6 +5,11 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * BookOrder domain entity
+ */
 @Entity
 @Table
 public class BookOrder {

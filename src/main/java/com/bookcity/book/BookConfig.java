@@ -10,6 +10,11 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * BookConfig object
+ */
 @Configuration
 public class BookConfig {
 

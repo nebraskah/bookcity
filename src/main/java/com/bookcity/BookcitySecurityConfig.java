@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * @author Domingos Manuel
+ * Date: 24 February 2021
+ * BookcitySecurityConfig Web Security Configurator
+ */
 @Configuration
 @EnableWebSecurity
 public class BookcitySecurityConfig extends WebSecurityConfigurerAdapter {
