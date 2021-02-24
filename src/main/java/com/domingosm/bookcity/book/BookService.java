@@ -66,11 +66,12 @@ public class BookService {
     }
 
     public void updateQuantity(Long bookId) {
-//        boolean exists = repository.existsById(bookId);
-//        if (!exists)
-//            throw new NoSuchElementException("record with id " + bookId + " not found");
 
         Optional<Book> dbBook = repository.findById(bookId);
+        if (dbBook.get().getBookStockOnHand() <= 0) {
+            String response = String.format("ERROR: No stock for book %s", dbBook.get().getBookTitle());
+            throw new UnsupportedOperationException(response);
+        }
         dbBook.get().setBookStockOnHand(dbBook.get().getBookStockOnHand()-1);
         repository.save(dbBook.get());
     }

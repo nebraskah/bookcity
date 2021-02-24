@@ -2,7 +2,6 @@ package com.domingosm.bookcity.bookorder;
 
 import com.domingosm.bookcity.book.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public class BookOrderController {
 
     @PostMapping
     public void placeOrder(@RequestBody BookOrder bookOrder) {
-        bookOrderService.placeOrder(bookOrder);
         bookService.updateQuantity(bookOrder.getOrderBookId());
+        bookOrderService.placeOrder(bookOrder);
     }
 
 }
