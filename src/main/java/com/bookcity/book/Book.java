@@ -1,9 +1,29 @@
-package com.domingosm.bookcity.book;
+package com.bookcity.book;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
-public class BookResponse {
+/**
+ * @author Domingos Manuel
+ * Date: 23 February 2021
+ * Book POJO (is this a POJO for real???)
+ */
 
+@Entity
+@Table
+public class Book {
+
+    @Id
+    @SequenceGenerator(
+            name = "book_sequence",
+            sequenceName = "book_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "book_sequence"
+    )
     private Long bookId;
     private String bookTitle;
     private String bookDescription;
@@ -19,122 +39,94 @@ public class BookResponse {
     private String bookAuthor;
     private Double bookSellingPrice;
     private Integer bookStockOnHand;
-    private Integer responseCode;
-    private String responseMessage;
 
-    public BookResponse() {
+    public Book() {
+    }
+
+    public Book(String bookTitle,
+                String bookDescription,
+                String bookGenre,
+                String bookIsbn,
+                String bookPublisher,
+                LocalDate bookPublishDate,
+                String bookEdition,
+                Integer bookPageCount,
+                String bookCountry,
+                String bookLanguage,
+                String bookWebsite,
+                String bookAuthor,
+                Double bookSellingPrice,
+                Integer bookStockOnHand) {
+        this.bookTitle = bookTitle;
+        this.bookDescription = bookDescription;
+        this.bookGenre = bookGenre;
+        this.bookIsbn = bookIsbn;
+        this.bookPublisher = bookPublisher;
+        this.bookPublishDate = bookPublishDate;
+        this.bookEdition = bookEdition;
+        this.bookPageCount = bookPageCount;
+        this.bookCountry = bookCountry;
+        this.bookLanguage = bookLanguage;
+        this.bookWebsite = bookWebsite;
+        this.bookAuthor = bookAuthor;
+        this.bookSellingPrice = bookSellingPrice;
+        this.bookStockOnHand = bookStockOnHand;
     }
 
     public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
-
     public String getBookTitle() {
         return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
     }
 
     public String getBookDescription() {
         return bookDescription;
     }
 
-    public void setBookDescription(String bookDescription) {
-        this.bookDescription = bookDescription;
-    }
-
     public String getBookGenre() {
         return bookGenre;
-    }
-
-    public void setBookGenre(String bookGenre) {
-        this.bookGenre = bookGenre;
     }
 
     public String getBookIsbn() {
         return bookIsbn;
     }
 
-    public void setBookIsbn(String bookIsbn) {
-        this.bookIsbn = bookIsbn;
-    }
-
     public String getBookPublisher() {
         return bookPublisher;
-    }
-
-    public void setBookPublisher(String bookPublisher) {
-        this.bookPublisher = bookPublisher;
     }
 
     public LocalDate getBookPublishDate() {
         return bookPublishDate;
     }
 
-    public void setBookPublishDate(LocalDate bookPublishDate) {
-        this.bookPublishDate = bookPublishDate;
-    }
-
     public String getBookEdition() {
         return bookEdition;
-    }
-
-    public void setBookEdition(String bookEdition) {
-        this.bookEdition = bookEdition;
     }
 
     public Integer getBookPageCount() {
         return bookPageCount;
     }
 
-    public void setBookPageCount(Integer bookPageCount) {
-        this.bookPageCount = bookPageCount;
-    }
-
     public String getBookCountry() {
         return bookCountry;
-    }
-
-    public void setBookCountry(String bookCountry) {
-        this.bookCountry = bookCountry;
     }
 
     public String getBookLanguage() {
         return bookLanguage;
     }
 
-    public void setBookLanguage(String bookLanguage) {
-        this.bookLanguage = bookLanguage;
-    }
-
     public String getBookWebsite() {
         return bookWebsite;
-    }
-
-    public void setBookWebsite(String bookWebsite) {
-        this.bookWebsite = bookWebsite;
     }
 
     public String getBookAuthor() {
         return bookAuthor;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
-    }
-
     public Double getBookSellingPrice() {
         return bookSellingPrice;
-    }
-
-    public void setBookSellingPrice(Double bookSellingPrice) {
-        this.bookSellingPrice = bookSellingPrice;
     }
 
     public Integer getBookStockOnHand() {
@@ -145,25 +137,9 @@ public class BookResponse {
         this.bookStockOnHand = bookStockOnHand;
     }
 
-    public Integer getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(Integer responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    public String getResponseMessage() {
-        return responseMessage;
-    }
-
-    public void setResponseMessage(String responseMessage) {
-        this.responseMessage = responseMessage;
-    }
-
     @Override
     public String toString() {
-        return "BookResponse{" +
+        return "Book{" +
                 "bookId=" + bookId +
                 ", bookTitle='" + bookTitle + '\'' +
                 ", bookDescription='" + bookDescription + '\'' +
@@ -179,8 +155,26 @@ public class BookResponse {
                 ", bookAuthor='" + bookAuthor + '\'' +
                 ", bookSellingPrice=" + bookSellingPrice +
                 ", bookStockOnHand=" + bookStockOnHand +
-                ", responseCode=" + responseCode +
-                ", responseMessage='" + responseMessage + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (Book.class.isInstance(obj)) {
+            Book book = (Book) obj;
+            return bookTitle.equalsIgnoreCase(book.bookTitle)
+                    && bookAuthor.equalsIgnoreCase(book.bookAuthor)
+                    && bookIsbn.equalsIgnoreCase(book.bookIsbn);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookTitle, bookAuthor, bookIsbn);
     }
 }

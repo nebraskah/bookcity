@@ -1,5 +1,6 @@
-package com.domingosm.bookcity.bookorder;
+package com.bookcity.book;
 
+import com.bookcity.book.dao.BookOrderRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

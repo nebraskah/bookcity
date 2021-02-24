@@ -1,6 +1,6 @@
-package com.domingosm.bookcity.bookorder;
+package com.bookcity.book;
 
-import com.domingosm.bookcity.book.Book;
+import com.bookcity.book.Book;
 
 import java.time.LocalDate;
 
