@@ -1,9 +1,7 @@
 package com.bookcity.book.controller;
 
-import com.bookcity.book.Book;
-import com.bookcity.book.BookOrder;
-import com.bookcity.book.BookOrderResponse;
-import com.bookcity.book.BookResponse;
+import com.bookcity.book.entity.Book;
+import com.bookcity.book.entity.Order;
 import com.bookcity.book.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +17,12 @@ import java.util.List;
 @RequestMapping("/api.bookcity.com")
 public class BookController {
 
+    //Fix JUnit tests
+    //Order list of books
+    //enforce DB constraints
+    //Angular UI
+    //AWS deployment
+
     @Autowired
     private BookService bookService;
 
@@ -28,7 +32,7 @@ public class BookController {
     }
 
     @GetMapping(path = "/books/{bookId}")
-    public BookResponse getBook(@PathVariable ("bookId") Long bookId) {
+    public Book getBook(@PathVariable ("bookId") Long bookId) {
         return bookService.getBook(bookId);
     }
 
@@ -38,18 +42,17 @@ public class BookController {
     }
 
     @GetMapping(path = "/orders")
-    public List<BookOrderResponse> getOrders() {
+    public List<Order> getOrders() {
         return bookService.getOrders();
     }
 
     @GetMapping(path = "/orders/{orderId}")
-    public BookOrderResponse getOrder(@PathVariable ("orderId") Long orderId) {
+    public Order getOrder(@PathVariable ("orderId") Long orderId) {
         return bookService.getOrder(orderId);
     }
 
     @PostMapping(path = "/orders")
-    public void placeOrder(@RequestBody BookOrder bookOrder) {
-        bookService.updateQuantity(bookOrder.getOrderBookId());
-        bookService.placeOrder(bookOrder);
+    public void placeOrder(@RequestBody Order order) {
+        bookService.placeOrder(order);
     }
 }

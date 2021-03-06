@@ -1,4 +1,4 @@
-package com.bookcity.book;
+package com.bookcity.book.entity;
 
 import org.springframework.lang.Nullable;
 
@@ -7,12 +7,12 @@ import java.time.LocalDate;
 
 /**
  * @author Domingos Manuel
- * Date: 24 February 2021
- * BookOrder domain entity
+ * Date: 06 March 2021
+ * Order domain entity
  */
 @Entity
 @Table
-public class BookOrder {
+public class Order {
 
     @Id
     @SequenceGenerator(
@@ -29,6 +29,7 @@ public class BookOrder {
     private String orderCustomerAddress;
     private String orderCustomerEmail;
     private Long orderBookId;
+    private Integer orderQuantity;
 
     @Nullable
     private LocalDate orderDate;
@@ -36,19 +37,21 @@ public class BookOrder {
     @Nullable
     private Double orderAmount;
 
-    public BookOrder() {
+    public Order() {
     }
 
-    public BookOrder(String orderCustomerName,
-                     String orderCustomerAddress,
-                     String orderCustomerEmail,
-                     Long orderBookId,
-                     @Nullable LocalDate orderDate,
-                     @Nullable Double orderAmount) {
+    public Order(String orderCustomerName,
+                 String orderCustomerAddress,
+                 String orderCustomerEmail,
+                 Long orderBookId,
+                 Integer orderQuantity,
+                 @Nullable LocalDate orderDate,
+                 @Nullable Double orderAmount) {
         this.orderCustomerName = orderCustomerName;
         this.orderCustomerAddress = orderCustomerAddress;
         this.orderCustomerEmail = orderCustomerEmail;
         this.orderBookId = orderBookId;
+        this.orderQuantity = orderQuantity;
         this.orderDate = orderDate;
         this.orderAmount = orderAmount;
     }
@@ -73,6 +76,11 @@ public class BookOrder {
         return orderBookId;
     }
 
+    public Integer getOrderQuantity() {
+        return orderQuantity;
+    }
+
+    @Nullable
     public LocalDate getOrderDate() {
         return orderDate;
     }
@@ -81,6 +89,7 @@ public class BookOrder {
         this.orderDate = orderDate;
     }
 
+    @Nullable
     public Double getOrderAmount() {
         return orderAmount;
     }
@@ -91,12 +100,13 @@ public class BookOrder {
 
     @Override
     public String toString() {
-        return "BookOrder{" +
+        return "Order{" +
                 "orderId=" + orderId +
                 ", orderCustomerName='" + orderCustomerName + '\'' +
                 ", orderCustomerAddress='" + orderCustomerAddress + '\'' +
                 ", orderCustomerEmail='" + orderCustomerEmail + '\'' +
                 ", orderBookId=" + orderBookId +
+                ", orderQuantity=" + orderQuantity +
                 ", orderDate=" + orderDate +
                 ", orderAmount=" + orderAmount +
                 '}';

@@ -1,8 +1,8 @@
 package com.bookcity;
 
-import com.bookcity.book.Book;
-import com.bookcity.book.BookOrder;
-import com.bookcity.book.dao.BookOrderRepository;
+import com.bookcity.book.entity.Book;
+import com.bookcity.book.entity.Order;
+import com.bookcity.book.dao.OrderRepository;
 import com.bookcity.book.dao.BookRepository;
 import com.bookcity.book.service.BookService;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class BookcityApplicationTests {
 	private BookRepository bookRepository;
 
 	@MockBean
-	private BookOrderRepository bookOrderRepository;
+	private OrderRepository orderRepository;
 
 	@Test
 	public void getBooksTest() {
@@ -66,17 +66,17 @@ class BookcityApplicationTests {
 	public void getOrdersTest() {
 
 		/* Only true at application start-up */
-		when(bookOrderRepository.findAll()).thenReturn(Stream.of(
-				new BookOrder("Pravin Ghordan", "6 Forsyth Ave, Morningside, Durban, 4001, South Africa", "pravin@soe.co.za", new Long(4), LocalDate.of(2021, Month.JANUARY,15), 118.29),
-				new BookOrder("Maria Ramos", "Level 200, Carlton Centre, 150 Commissioner St, Cbd, Johannesburg, 2001, South Africa", "drramos@transnet.co.za", new Long(2), LocalDate.of(2020, Month.DECEMBER,22), 112.69),
-				new BookOrder("Daniel Mminele", "15 Troye Street, Johannesburg CBD, Downtown, 2001, South Africa", "drmminele@absa.co.za", new Long(6), LocalDate.of(2021, Month.FEBRUARY,4), 538.00)).collect(Collectors.toList()));
+		when(orderRepository.findAll()).thenReturn(Stream.of(
+				new Order("Pravin Ghordan", "6 Forsyth Ave, Morningside, Durban, 4001, South Africa", "pravin@soe.co.za", new Long(4), 1, LocalDate.of(2021, Month.JANUARY,15), 118.29),
+				new Order("Maria Ramos", "Level 200, Carlton Centre, 150 Commissioner St, Cbd, Johannesburg, 2001, South Africa", "drramos@transnet.co.za", new Long(2), 3, LocalDate.of(2020, Month.DECEMBER,22), 112.69),
+				new Order("Daniel Mminele", "15 Troye Street, Johannesburg CBD, Downtown, 2001, South Africa", "drmminele@absa.co.za", new Long(6), 2, LocalDate.of(2021, Month.FEBRUARY,4), 538.00)).collect(Collectors.toList()));
 		assertEquals(3, bookService.getOrders().size());
 	}
 
 	@Test
 	public void getOrderTest() {
-		when(bookOrderRepository.findAll()).thenReturn(Stream.of(
-				new BookOrder("Pravin Ghordan", "6 Forsyth Ave, Morningside, Durban, 4001, South Africa", "pravin@soe.co.za", new Long(4), LocalDate.of(2021, Month.JANUARY,15), 118.29)).collect(Collectors.toList()));
+		when(orderRepository.findAll()).thenReturn(Stream.of(
+				new Order("Pravin Ghordan", "6 Forsyth Ave, Morningside, Durban, 4001, South Africa", "pravin@soe.co.za", new Long(4), 1, LocalDate.of(2021, Month.JANUARY,15), 118.29)).collect(Collectors.toList()));
 		assertEquals(1, bookService.getOrders().size());
 	}
 

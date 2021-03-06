@@ -1,6 +1,7 @@
-package com.bookcity.book;
+package com.bookcity.book.config;
 
 import com.bookcity.book.dao.BookRepository;
+import com.bookcity.book.entity.Book;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
