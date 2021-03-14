@@ -163,7 +163,7 @@ public class Book {
             return true;
 
         if (Book.class.isInstance(obj)) {
-            Book book = (Book) obj;
+            Book book = Book.class.cast(obj);
             return bookTitle.equalsIgnoreCase(book.bookTitle)
                     && bookAuthor.equalsIgnoreCase(book.bookAuthor)
                     && bookIsbn.equalsIgnoreCase(book.bookIsbn);

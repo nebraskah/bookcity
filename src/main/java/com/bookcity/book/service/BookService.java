@@ -46,15 +46,18 @@ public class BookService {
     }
 
     public void addBook(Book book) {
-        //try to save the duplicate. let the db handle this
-//        List<Book> bookList = repository.findAll();
-//        bookList.forEach(dbBook -> {
-//            if (dbBook.equals(book)) {
-//                String response = String.format("ERROR: Book entry with title %s already exists", dbBook.getBookTitle());
-//                throw new ConcurrentModificationException(response);crap
-//            }
-//        });
-        repository.save(book);
+        //get the db to handle saving of duplicates
+        List<Book> bookList = repository.findAll();
+        bookList.forEach(dbBook -> {
+            if (dbBook.equals(book)) {
+                String response = String.format("ERROR: Book entry with title %s already exists", dbBook.getBookTitle());
+                LOGGER.log(Level.ALL, response);
+                return;
+            } else {
+                repository.save(book);
+            }
+        });
+//        repository.save(book);
     }
 
     public List<Order> getOrders() {
@@ -75,16 +78,15 @@ public class BookService {
     public void placeOrder(Order order) {
 
         Optional<Book> book = Optional.of(repository.findById(order.getOrderBookId()).orElse(null));
-        if (!isSellingOk(order, book)) {
+        if (!satisfiesSelling(order, book))
             return;
-        }
 
         order.setOrderDate(LocalDate.now());
-        order.setOrderAmount(book.get().getBookSellingPrice());
+        order.setOrderAmount(book.get().getBookSellingPrice()*order.getOrderQuantity());
         orderRepository.save(order);
     }
 
-    private boolean isSellingOk(Order order, Optional<Book> dbBook) {
+    private boolean satisfiesSelling(Order order, Optional<Book> dbBook) {
 
         Long bookId = order.getOrderBookId();
         Integer orderQuantity = order.getOrderQuantity();
@@ -93,15 +95,14 @@ public class BookService {
             String message = String.format("ERROR: Book entry with id %s not found", String.valueOf(bookId));
             LOGGER.log(Level.ALL, message);
             return false;
-
         }
-        if (dbBook.get().getBookStockOnHand() <= 0) { //ensure at DB level
-            String message = String.format("ERROR: No stock for book %s", dbBook.get().getBookTitle());
+        if (dbBook.get().getBookStockOnHand() <= 0) { //enforce at DB level
+            String message = String.format("ERROR: No stock for Book %s", dbBook.get().getBookTitle());
             LOGGER.log(Level.ALL, message);
             return false;
         }
         if (dbBook.get().getBookStockOnHand() < orderQuantity) { //ensure at DB level
-            String message = String.format("ERROR: Not enough stock for book %s. Can only take %d copies", dbBook.get().getBookTitle(), dbBook.get().getBookStockOnHand());
+            String message = String.format("ERROR: Not enough stock for Book %s. Can only take %d copies", dbBook.get().getBookTitle(), dbBook.get().getBookStockOnHand());
             LOGGER.log(Level.ALL, message);
             return false;
         }

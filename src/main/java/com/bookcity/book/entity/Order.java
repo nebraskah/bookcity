@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * Order domain entity
  */
 @Entity
-@Table
+@Table(name="book_order")
 public class Order {
 
     @Id

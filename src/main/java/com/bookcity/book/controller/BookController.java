@@ -20,8 +20,8 @@ public class BookController {
     //Fix JUnit tests
     //Order list of books
     //enforce DB constraints
-    //Angular UI
     //AWS deployment
+    //Angular UI
 
     @Autowired
     private BookService bookService;
